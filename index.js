@@ -11,7 +11,8 @@ app.get("/", function(req, res) {
     const resume = {
         description: 'Hpbtec-app1 - Backend',
         author: 'Hernando de Paula Brasileiro',
-        created_at: '2021-06-28 17:00'
+        created_at: '2021-06-28 17:00',
+        description: 'NodeJs And Postgre API Sample'
     };
     res.json(resume);
 });
