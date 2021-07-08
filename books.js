@@ -5,13 +5,17 @@ var express = require('express');
 var router = express.Router();
 
 router.get("/", async(req, res) => {
+    
     try {
+
         const allBooks = await pool.query("SELECT * FROM books");
         res.json(allBooks.rows);
+    
     } catch(err) {
         console.log(err.message);
         res.json(JSON.stringify({ message: "NOK" })); 
     }
+
 });
 
 router.get("/:id", async(req, res) => {
