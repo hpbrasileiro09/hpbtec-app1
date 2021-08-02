@@ -12,7 +12,7 @@ app.get("/", function(req, res) {
         description: 'Hpbtec-app1 - Backend',
         author: 'Hernando de Paula Brasileiro',
         created_at: '2021-06-28 17:00',
-        updated_at: '2021-08-01 22:15',
+        updated_at: '2021-08-01 22:28',
         description: 'NodeJs And Postgre API Sample'
     };
     res.json(resume);

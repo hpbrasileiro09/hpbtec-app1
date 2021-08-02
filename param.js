@@ -1,4 +1,4 @@
-// param.js -  route module.
+// params.js -  route module.
 
 const pool = require("./db");
 var express = require('express');
