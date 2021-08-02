@@ -48,7 +48,7 @@ router.post("/", async(req, res) => {
     try {
         const { label, value, default_value, dt_params, type } = req.body;
         const newReg = await pool.query(
-            "INSERT INTO params ( id, label, value, default_value, dt_params, type ) VALUES ( nextval('entries_id_seq'), $1, $2, $3, $4, $5 ) RETURNING *",
+            "INSERT INTO params ( id, label, value, default_value, dt_params, type ) VALUES ( nextval('params_id_seq'), $1, $2, $3, $4, $5 ) RETURNING *",
             [ id, label, value, default_value, dt_params, type ]
         );
         res.json(newReg.rows[0]); 

@@ -48,7 +48,7 @@ router.post("/", async(req, res) => {
     try {
         const { name, published, vl_prev, day_prev, ordem, type } = req.body;
         const newReg = await pool.query(
-            "INSERT INTO categories ( id, name, published, vl_prev, day_prev, ordem, type ) VALUES ( nextval('entries_id_seq'), $1, $2, $3, $4, $5, $6 ) RETURNING *",
+            "INSERT INTO categories ( id, name, published, vl_prev, day_prev, ordem, type ) VALUES ( nextval('categories_id_seq'), $1, $2, $3, $4, $5, $6 ) RETURNING *",
             [ id, name, published, vl_prev, day_prev, ordem, type ]
         );
         res.json(newReg.rows[0]); 
