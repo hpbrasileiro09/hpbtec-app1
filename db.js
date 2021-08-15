@@ -1,6 +1,8 @@
+require('dotenv/config');
+
 const Pool = require("pg").Pool;
 
-let connString = process.env.DATABASE_URL
+let connString = process.env.DATABASE_URL || process.env.DB_URL
 
 const pool = new Pool({
     connectionString : connString,

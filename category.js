@@ -1,10 +1,12 @@
 // category.js -  route module.
 
+const auth = require("./middleware/auth");
+
 const pool = require("./db");
 var express = require('express');
 var router = express.Router();
 
-router.get("/", async(req, res) => {
+router.get("/", auth, async(req, res) => {
     
     try {
 
@@ -18,7 +20,7 @@ router.get("/", async(req, res) => {
 
 });
 
-router.get("/:id", async(req, res) => {
+router.get("/:id", auth, async(req, res) => {
     try {
         const { id } = req.params;
         const getReg = await pool.query("SELECT * FROM categories WHERE id = $1",[ id ]);
@@ -29,7 +31,7 @@ router.get("/:id", async(req, res) => {
     }
 });
 
-router.put("/:id", async(req, res) => {
+router.put("/:id", auth, async(req, res) => {
     try {
         const { id } = req.params;
         const { name, published, vl_prev, day_prev, ordem, type } = req.body;
@@ -44,7 +46,7 @@ router.put("/:id", async(req, res) => {
     }
 });
 
-router.post("/", async(req, res) => {
+router.post("/", auth, async(req, res) => {
     try {
         const { name, published, vl_prev, day_prev, ordem, type } = req.body;
         const newReg = await pool.query(
@@ -58,7 +60,7 @@ router.post("/", async(req, res) => {
     }
 });
 
-router.delete("/:id", async(req, res) => {
+router.delete("/:id", auth, async(req, res) => {
     try {
         const { id } = req.params;
         const delReg = await pool.query(

@@ -1,10 +1,12 @@
 // params.js -  route module.
 
+const auth = require("./middleware/auth");
+
 const pool = require("./db");
 var express = require('express');
 var router = express.Router();
 
-router.get("/", async(req, res) => {
+router.get("/", auth, async(req, res) => {
     
     try {
 
@@ -13,23 +15,23 @@ router.get("/", async(req, res) => {
     
     } catch(err) {
         console.log(err.message);
-        res.json(JSON.stringify({ message: "NOK" })); 
+        res.json({ message: "NOK", detail: "" }); 
     }
 
 });
 
-router.get("/:id", async(req, res) => {
+router.get("/:id", auth, async(req, res) => {
     try {
         const { id } = req.params;
         const getReg = await pool.query("SELECT * FROM params WHERE id = $1",[ id ]);
         res.json(getReg.rows[0]);
     } catch(err) {
         console.log(err.message);
-        res.json(JSON.stringify({ message: "NOK" })); 
+        res.json({ message: "NOK", detail: "" }); 
     }
 });
 
-router.put("/:id", async(req, res) => {
+router.put("/:id", auth, async(req, res) => {
     try {
         const { id } = req.params;
         const { label, value, default_value, dt_params, type } = req.body;
@@ -40,11 +42,11 @@ router.put("/:id", async(req, res) => {
         res.json(updReg.rows[0]); 
     } catch(err) {
         console.log(err.message);
-        res.json(JSON.stringify({ message: "NOK" })); 
+        res.json({ message: "NOK", detail: "" }); 
     }
 });
 
-router.post("/", async(req, res) => {
+router.post("/", auth, async(req, res) => {
     try {
         const { label, value, default_value, dt_params, type } = req.body;
         const newReg = await pool.query(
@@ -54,11 +56,11 @@ router.post("/", async(req, res) => {
         res.json(newReg.rows[0]); 
     } catch(err) {
         console.log(err.message);
-        res.json(JSON.stringify({ message: "NOK" })); 
+        res.json({ message: "NOK", detail: "" }); 
     }
 });
 
-router.delete("/:id", async(req, res) => {
+router.delete("/:id", auth, async(req, res) => {
     try {
         const { id } = req.params;
         const delReg = await pool.query(
@@ -68,7 +70,7 @@ router.delete("/:id", async(req, res) => {
         res.json(delReg.rows[0]); 
     } catch(err) {
         console.log(err.message);
-        res.json(JSON.stringify({ message: "NOK" })); 
+        res.json({ message: "NOK", detail: "" }); 
     }
 });
 
